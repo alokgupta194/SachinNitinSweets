@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#6f1730" />
+  <meta name="description" content="Sachin Nitin Sweet — premium mithai, samosa and Indian snacks in Kanpur." />
+  <title>Sachin Nitin Sweet | Mithai & Snacks • Kanpur</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --wine: #6f1730;
+      --wine-dark: #4a0d20;
+      --saffron: #e58b27;
+      --cream: #fff9ef;
+      --paper: #fffdf8;
+      --ink: #211719;
+      --muted: #756a6b;
+      --line: rgba(60, 25, 30, .10);
+      --shadow: 0 18px 50px rgba(67, 24, 31, .11);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "DM Sans", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { width: 100%; display: block; object-fit: cover; }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    button { cursor: pointer; border: 0; }
+
+    .container { width: min(1160px, calc(100% - 40px)); margin: auto; }
+    .eyebrow {
+      color: var(--saffron);
+      font-size: .76rem;
+      letter-spacing: .18em;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    h1, h2, h3 { font-family: "Playfair Display", serif; line-height: 1.05; }
+    h2 { font-size: clamp(2.2rem, 4vw, 3.5rem); }
+    .section-head { margin-bottom: 34px; }
+    .section-head p { max-width: 580px; color: var(--muted); margin-top: 12px; }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      transition: .3s ease;
+    }
+    header.scrolled {
+      background: rgba(255,253,248,.88);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 1px 0 var(--line);
+    }
+    .nav {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-weight: 800;
+      color: white;
+    }
+    header.scrolled .logo { color: var(--wine); }
+    .logo-mark {
+      width: 38px; height: 38px;
+      border: 1.5px solid currentColor;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-family: "Playfair Display", serif;
+      font-size: 18px;
+    }
+    .logo-text span { display:block; font-size: 13px; opacity:.7; font-weight:600; letter-spacing:.06em; }
+    .logo-text strong { font-size: 17px; letter-spacing:.01em; }
+    nav { display: flex; gap: 28px; color: rgba(255,255,255,.88); font-size: 14px; font-weight:600; }
+    header.scrolled nav { color: var(--ink); }
+    nav a { transition: .2s; }
+    nav a:hover { color: var(--saffron); }
+    .nav-cta {
+      padding: 11px 17px;
+      background: var(--saffron);
+      color: white;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .menu-btn { display:none; background:none; color:inherit; font-size:25px; }
+
+    /* Hero */
+    .hero {
+      min-height: 740px;
+      background:
+        linear-gradient(90deg, rgba(42,8,18,.96) 0%, rgba(60,12,25,.83) 44%, rgba(60,12,25,.20) 100%),
+        url("https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1800&q=85") center/cover;
+      color: white;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+    .hero:after {
+      content:"";
+      position:absolute; inset:auto 0 0; height:110px;
+      background: linear-gradient(transparent, var(--paper));
+    }
+    .hero-content { max-width: 650px; padding-top: 70px; position:relative; z-index:1; }
+    .hero .eyebrow { color:#f5ae53; }
+    .hero h1 { font-size: clamp(3.5rem, 7vw, 6.7rem); letter-spacing:-.045em; }
+    .hero h1 em { color:#f4a64b; font-style:normal; }
+    .hero p { margin: 22px 0 28px; max-width: 570px; color: rgba(255,255,255,.79); font-size: 17px; }
+    .actions { display:flex; gap:12px; flex-wrap:wrap; }
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding:14px 21px; border-radius:999px; font-weight:800; font-size:14px;
+      transition: transform .2s, box-shadow .2s, background .2s;
+    }
+    .btn:hover { transform:translateY(-2px); box-shadow:0 10px 25px rgba(0,0,0,.15); }
+    .btn-primary { background: var(--saffron); color:white; }
+    .btn-light { background: rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.28); color:white; backdrop-filter:blur(8px); }
+
+    .hero-badge {
+      position:absolute; right:8%; bottom:110px; z-index:2;
+      width:145px; height:145px; border-radius:50%;
+      background:#f8d18d; color:var(--wine-dark);
+      display:grid; place-items:center; text-align:center;
+      padding:20px; transform:rotate(8deg);
+      box-shadow: var(--shadow);
+    }
+    .hero-badge strong { font-family:"Playfair Display"; font-size:25px; display:block; }
+    .hero-badge small { font-size:10px; text-transform:uppercase; letter-spacing:.1em; }
+
+    /* Trust strip */
+    .trust { padding: 28px 0; border-bottom:1px solid var(--line); }
+    .trust-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+    .trust-item { display:flex; gap:12px; align-items:center; justify-content:center; }
+    .trust-icon { font-size:22px; }
+    .trust-item strong { display:block; font-size:13px; }
+    .trust-item span { color:var(--muted); font-size:11px; }
+
+    /* Sections */
+    section { padding: 95px 0; }
+    .categories { background:var(--cream); }
+    .category-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    .category {
+      min-height:250px; border-radius:var(--radius); overflow:hidden; position:relative; color:white;
+      box-shadow:var(--shadow);
+    }
+    .category img { height:100%; transition:transform .6s; }
+    .category:hover img { transform:scale(1.06); }
+    .category:after { content:""; position:absolute; inset:0; background:linear-gradient(transparent 35%, rgba(20,5,8,.82)); }
+    .category-info { position:absolute; z-index:1; left:23px; right:23px; bottom:21px; }
+    .category-info h3 { font-size:27px; }
+    .category-info span { font-size:12px; opacity:.82; }
+
+    /* Products */
+    .filter-row { display:flex; gap:9px; flex-wrap:wrap; margin-bottom:28px; }
+    .filter {
+      border:1px solid var(--line); background:white; color:var(--muted);
+      padding:9px 15px; border-radius:999px; font-size:13px; font-weight:700;
+    }
+    .filter.active, .filter:hover { background:var(--wine); color:white; border-color:var(--wine); }
+    .product-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+    .product {
+      background:white; border:1px solid var(--line); border-radius:20px; overflow:hidden;
+      transition:.3s; position:relative;
+    }
+    .product:hover { transform:translateY(-5px); box-shadow:var(--shadow); }
+    .product-image { height:220px; overflow:hidden; position:relative; background:#f5eee7; }
+    .product-image img { height:100%; transition:.45s; }
+    .product:hover .product-image img { transform:scale(1.05); }
+    .tag { position:absolute; top:12px; left:12px; background:#fff4d9; color:#805019; border-radius:999px; padding:5px 9px; font-size:10px; font-weight:800; }
+    .product-body { padding:17px; }
+    .product-body h3 { font-size:20px; margin-bottom:5px; }
+    .product-body p { color:var(--muted); font-size:12px; min-height:38px; }
+    .product-bottom { display:flex; justify-content:space-between; align-items:center; margin-top:14px; }
+    .price { font-weight:800; color:var(--wine); }
+    .add {
+      width:34px; height:34px; border-radius:50%; background:var(--wine); color:white; font-size:20px;
+      transition:.2s;
+    }
+    .add:hover { background:var(--saffron); transform:rotate(90deg); }
+
+    /* Story */
+    .story { background:var(--wine); color:white; }
+    .story-grid { display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center; }
+    .story h2 { font-size:clamp(2.3rem,4vw,4rem); }
+    .story p { color:rgba(255,255,255,.7); margin:18px 0; }
+    .story-image { border-radius:28px; overflow:hidden; height:470px; position:relative; }
+    .story-image img { height:100%; }
+    .story-card {
+      position:absolute; bottom:20px; left:20px; right:20px; padding:17px 20px;
+      background:rgba(255,255,255,.12); backdrop-filter:blur(15px); border:1px solid rgba(255,255,255,.15);
+      border-radius:17px;
+    }
+    .story-card strong { font-family:"Playfair Display"; font-size:22px; }
+    .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:15px; margin-top:28px; }
+    .stat { border-top:1px solid rgba(255,255,255,.18); padding-top:14px; }
+    .stat strong { display:block; font-size:25px; font-family:"Playfair Display"; color:#f4ae58; }
+    .stat span { font-size:11px; color:rgba(255,255,255,.6); }
+
+    /* Reviews */
+    .reviews { background:var(--cream); }
+    .review-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    .review { background:white; padding:27px; border-radius:20px; border:1px solid var(--line); }
+    .stars { color:#e89a34; letter-spacing:3px; }
+    .review p { margin:15px 0 20px; font-family:"Playfair Display"; font-size:18px; line-height:1.4; }
+    .review small { color:var(--muted); }
+
+    /* Visit */
+    .visit-grid { display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+    .visit-card { border-radius:25px; background:var(--cream); padding:38px; }
+    .visit-card h2 { margin-bottom:15px; }
+    .visit-card p { color:var(--muted); }
+    .contact-list { list-style:none; margin:25px 0; display:grid; gap:14px; }
+    .contact-list li { display:flex; gap:13px; align-items:flex-start; }
+    .contact-list b { font-size:13px; display:block; }
+    .contact-list span { color:var(--muted); font-size:12px; }
+    .map {
+      min-height:370px; border-radius:25px; overflow:hidden; position:relative;
+      background:
+        linear-gradient(rgba(111,23,48,.08),rgba(111,23,48,.08)),
+        url("https://images.unsplash.com/photo-1523731407965-2430cd12f5e4?auto=format&fit=crop&w=1200&q=80") center/cover;
+    }
+    .map-pin {
+      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      background:white; padding:13px 17px; border-radius:16px; box-shadow:var(--shadow); text-align:center;
+    }
+    .map-pin strong { font-family:"Playfair Display"; color:var(--wine); }
+    .map-pin small { display:block; color:var(--muted); font-size:10px; }
+
+    /* Footer */
+    footer { background:#260b13; color:white; padding:50px 0 25px; }
+    .footer-top { display:flex; justify-content:space-between; gap:30px; padding-bottom:35px; }
+    .footer-brand { max-width:350px; }
+    .footer-brand p { color:rgba(255,255,255,.55); font-size:13px; margin-top:12px; }
+    .footer-links { display:flex; gap:55px; }
+    .footer-links h4 { font-size:12px; margin-bottom:12px; color:#f1a84f; }
+    .footer-links a { display:block; color:rgba(255,255,255,.62); font-size:12px; margin:7px 0; }
+    .copyright { border-top:1px solid rgba(255,255,255,.1); padding-top:20px; color:rgba(255,255,255,.4); font-size:11px; display:flex; justify-content:space-between; }
+
+    /* Floating order */
+    .floating-order {
+      position:fixed; right:20px; bottom:20px; z-index:40;
+      background:#168c52; color:white; border-radius:999px; padding:13px 18px;
+      box-shadow:0 12px 35px rgba(0,0,0,.2); font-size:13px; font-weight:800;
+    }
+
+    /* Toast */
+    .toast {
+      position:fixed; left:50%; bottom:25px; transform:translate(-50%,120px);
+      background:#211719; color:white; padding:12px 18px; border-radius:999px; z-index:100;
+      font-size:13px; transition:.35s; box-shadow:var(--shadow);
+    }
+    .toast.show { transform:translate(-50%,0); }
+
+    /* Reveal */
+    .reveal { opacity:0; transform:translateY(25px); transition:.7s ease; }
+    .reveal.visible { opacity:1; transform:none; }
+
+    @media(max-width: 900px) {
+      nav { display:none; }
+      .menu-btn { display:block; }
+      .nav-cta { display:none; }
+      .hero { min-height:680px; }
+      .hero-badge { right:5%; bottom:90px; width:110px; height:110px; }
+      .product-grid { grid-template-columns:repeat(2,1fr); }
+      .category-grid { grid-template-columns:1fr 1fr; }
+      .story-grid, .visit-grid { grid-template-columns:1fr; }
+      .story-image { height:380px; }
+    }
+
+    @media(max-width: 600px) {
+      .container { width:min(100% - 28px, 1160px); }
+      .nav { height:68px; }
+      .hero { min-height:700px; background-position:58% center; }
+      .hero-content { padding-top:50px; }
+      .hero h1 { font-size:3.45rem; }
+      .hero p { font-size:15px; }
+      .hero-badge { display:none; }
+      section { padding:70px 0; }
+      .trust-grid { grid-template-columns:1fr 1fr; gap:18px 8px; }
+      .trust-item { justify-content:flex-start; }
+      .category-grid, .product-grid, .review-grid { grid-template-columns:1fr; }
+      .category { min-height:220px; }
+      .product-image { height:245px; }
+      .stats { grid-template-columns:1fr 1fr 1fr; }
+      .story-image { height:320px; }
+      .visit-card { padding:26px; }
+      .footer-top { flex-direction:column; }
+      .footer-links { gap:45px; }
+      .copyright { flex-direction:column; gap:8px; }
+      .floating-order { right:12px; bottom:12px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header id="header">
+    <div class="container nav">
+      <a class="logo" href="#home" aria-label="Sachin Nitin Sweet home">
+        <div class="logo-mark">SN</div>
+        <div class="logo-text">
+          <strong>Sachin Nitin Sweet</strong>
+          <span>Kanpur • Since 1998</span>
+        </div>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <a href="#menu">Mithai</a>
+        <a href="#snacks">Snacks</a>
+        <a href="#story">Our Story</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#visit">Visit Us</a>
+      </nav>
+
+      <a class="nav-cta" href="tel:+919999999999">Call to Order</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-content reveal">
+          <div class="eyebrow">A little sweetness from Kanpur</div>
+          <h1>Made with love.<br><em>Served with joy.</em></h1>
+          <p>
+            Traditional Indian mithai, crispy samosas and fresh snacks —
+            crafted every day with ingredients we’re proud to serve.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#menu">Explore Mithai →</a>
+            <a class="btn btn-light" href="#visit">Find Our Shop</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-badge">
+        <div><strong>Fresh</strong><small>Every single day</small></div>
+      </div>
+    </section>
+
+    <div class="trust">
+      <div class="container trust-grid">
+        <div class="trust-item"><div class="trust-icon">✦</div><div><strong>Freshly Prepared</strong><span>Made every morning</span></div></div>
+        <div class="trust-item"><div class="trust-icon">◉</div><div><strong>Pure Ingredients</strong><span>Quality you can taste</span></div></div>
+        <div class="trust-item"><div class="trust-icon">♡</div><div><strong>Made with Care</strong><span>Traditional recipes</span></div></div>
+        <div class="trust-item"><div class="trust-icon">⌂</div><div><strong>Kanpur Local</strong><span>Proudly serving you</span></div></div>
+      </div>
+    </div>
+
+    <section class="categories" id="snacks">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Something for everyone</div>
+          <h2>Pick your kind of happy.</h2>
+          <p>From a hot evening snack to a box of mithai for someone special.</p>
+        </div>
+
+        <div class="category-grid">
+          <a class="category reveal" href="#menu">
+            <img src="https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=900&q=85" alt="Crispy samosas">
+            <div class="category-info"><h3>Hot Samosas</h3><span>Crispy • Spicy • Fresh</span></div>
+          </a>
+          <a class="category reveal" href="#menu">
+            <img src="./jalebi.jpeg" alt="Indian sweets">
+            <div class="category-info"><h3>Classic Mithai</h3><span>Gulab Jamun • Kaju • Barfi</span></div>
+          </a>
+          <a class="category reveal" href="#menu">
+            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=85" alt="Festive sweet box">
+            <div class="category-info"><h3>Gift Boxes</h3><span>Made for celebrations</span></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="menu">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">The favourites</div>
+          <h2>Fresh from our kitchen.</h2>
+          <p>Our most-loved treats. Tap + to add something to your order.</p>
+        </div>
+
+        <div class="filter-row" role="tablist">
+          <button class="filter active" data-filter="all">All</button>
+          <button class="filter" data-filter="mithai">Mithai</button>
+          <button class="filter" data-filter="snacks">Snacks</button>
+          <button class="filter" data-filter="special">Specials</button>
+        </div>
+
+        <div class="product-grid">
+          <article class="product reveal" data-category="special">
+            <div class="product-image">
+              <span class="tag">BESTSELLER</span>
+              <img src="./gulabJamun.jpg" alt="Gulab Jamun">
+            </div>
+            <div class="product-body">
+              <h3>Gulab Jamun</h3><p>Soft, warm and soaked in fragrant sugar syrup.</p>
+              <div class="product-bottom"><span class="price">₹20 / Piece </span><button class="add" data-name="Gulab Jamun">+</button></div>
+            </div>
+          </article>
+
+          <article class="product reveal" data-category="mithai">
+            <div class="product-image">
+              <span class="tag">POPULAR</span>
+              <img src="./kajukatli.jpeg" alt="Kaju Katli">
+            </div>
+            <div class="product-body">
+              <h3>Kaju Katli</h3><p>Silky cashew fudge with a delicate silver finish.</p>
+              <div class="product-bottom"><span class="price">₹900 / kg</span><button class="add" data-name="Kaju Katli">+</button></div>
+            </div>
+          </article>
+
+          <article class="product reveal" data-category="snacks">
+            <div class="product-image">
+              <span class="tag">HOT & FRESH</span>
+              <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=700&q=85" alt="Samosa">
+            </div>
+            <div class="product-body">
+              <h3>Samosa</h3><p>Golden, crispy pastry filled with our signature masala.</p>
+              <div class="product-bottom"><span class="price">₹15 / Piece</span><button class="add" data-name="Samosa">+</button></div>
+            </div>
+          </article>
+
+          <article class="product reveal" data-category="mithai">
+            <div class="product-image">
+              <img src="./motichur.jpg" alt="Motichoor Laddu">
+            </div>
+            <div class="product-body">
+              <h3>Motichoor Laddu</h3><p>Fine boondi, premium ghee and just the right sweetness.</p>
+              <div class="product-bottom"><span class="price">₹360 / kg</span><button class="add" data-name="Motichoor Laddu">+</button></div>
+            </div>
+          </article>
+
+          <article class="product reveal" data-category="special">
+            <div class="product-image">
+              <span class="tag">CHEF'S PICK</span>
+              <img src="./rasmalai.jpeg" alt="Rasmalai">
+            </div>
+            <div class="product-body">
+              <h3>Rasmalai</h3><p>Delicate chenna dumplings in creamy saffron milk.</p>
+              <div class="product-bottom"><span class="price">₹300 / kg</span><button class="add" data-name="Rasmalai">+</button></div>
+            </div>
+          </article>
+
+          <article class="product reveal" data-category="mithai">
+            <div class="product-image">
+              <img src="./besan.jpeg" alt="Besan Barfi">
+            </div>
+            <div class="product-body">
+              <h3>Besan Barfi</h3><p>Roasted besan, ghee and cardamom in every bite.</p>
+              <div class="product-bottom"><span class="price">₹560 / kg</span><button class="add" data-name="Besan Barfi">+</button></div>
+            </div>
+          </article>
+          <article class="product reveal" data-category="mithai">
+            <div class="product-image">
+              <img src="./gujhiyia.jpeg" alt="Besan Barfi">
+            </div>
+            <div class="product-body">
+              <h3>Gujhia</h3><p>Roasted besan, ghee and cardamom in every bite.</p>
+              <div class="product-bottom"><span class="price">₹10 / Piece</span><button class="add" data-name="Gujhia Barfi">+</button></div>
+            </div>
+          </article>
+          <article class="product reveal" data-category="mithai">
+            <div class="product-image">
+              <img src="./rajbhog.jpeg" alt="Besan Barfi">
+            </div>
+            <div class="product-body">
+              <h3>Raj bhog</h3><p></p>
+              <div class="product-bottom"><span class="price">₹380 / kg</span><button class="add" data-name="Gujhia Barfi">+</button></div>
+            </div>
+          </article>
+          <article class="product reveal" data-category="mithai">
+            <div class="product-image">
+              <img src="./paner.jpeg" alt="Besan Barfi">
+            </div>
+            <div class="product-body">
+              <h3>Paneer (cheese)</h3><p></p>
+              <div class="product-bottom"><span class="price">₹320 / kg</span><button class="add" data-name="Gujhia Barfi">+</button></div>
+            </div>
+          </article>
+          <article class="product reveal" data-category="mithai">
+            <div class="product-image">
+              <img src="./sonpapdi.jpeg" alt="Besan Barfi">
+            </div>
+            <div class="product-body">
+              <h3>Sohan Papdi</h3><p></p>
+              <div class="product-bottom"><span class="price">₹350 / kg</span><button class="add" data-name="Gujhia Barfi">+</button></div>
+            </div>
+            </article>
+            <article class="product reveal" data-category="mithai">
+            <div class="product-image">
+              <img src="./peda.jpeg" alt="Besan Barfi">
+            </div>
+            <div class="product-body">
+              <h3>Peda</h3><p></p>
+              <div class="product-bottom"><span class="price">₹330 / kg</span><button class="add" data-name="Gujhia Barfi">+</button></div>
+            </div>
+          </article>
+          <article class="product reveal" data-category="mithai">
+            <div class="product-image">
+              <img src="./gehawar.jpeg" alt="Besan Barfi">
+            </div>
+            <div class="product-body">
+              <h3>Ghevar</h3><p></p>
+              <div class="product-bottom"><span class="price">₹750 / kg</span><button class="add" data-name="Gujhia Barfi">+</button></div>
+            </div>
+          </article>
+        </div>
+        
+        </div>
+      </div>
+    </section>
+
+    <section class="story" id="story">
+      <div class="container story-grid">
+        <div class="reveal">
+          <div class="eyebrow">Our little story</div>
+          <h2>Good sweets are made with good intentions.</h2>
+          <p>
+            Sachin Nitin Sweet brings the familiar comfort of traditional Indian
+            mithai together with a fresh, modern approach. Every batch is prepared
+            with care so the taste feels just as special as the occasion.
+          </p>
+          <p>
+            Whether you’re grabbing two samosas on the way home or sending a box
+            to someone you love, we want every visit to end with a smile.
+          </p>
+          <div class="stats">
+            <div class="stat"><strong>25+</strong><span>Years of sweetness</span></div>
+            <div class="stat"><strong>20+</strong><span>Favourite varieties</span></div>
+            <div class="stat"><strong>1</strong><span>Kanpur home</span></div>
+          </div>
+        </div>
+        <div class="story-image reveal">
+          <img src="./gehawar.jpeg" alt="Traditional Indian sweets">
+          <div class="story-card">
+            <strong>“Har bite mein apnapan.”</strong>
+            <div style="font-size:11px;opacity:.65;">— Sachin Nitin Sweet</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reviews" id="reviews">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Loved locally</div>
+          <h2>What our customers say.</h2>
+        </div>
+        <div class="review-grid">
+          <article class="review reveal"><div class="stars">★★★★★</div><p>“The samosas are crispy, fresh and genuinely addictive. Perfect with chai.”</p><small>— Local customer, Kanpur</small></article>
+          <article class="review reveal"><div class="stars">★★★★★</div><p>“Bought a mithai box for a family function. Everything tasted fresh and premium.”</p><small>— Happy customer</small></article>
+          <article class="review reveal"><div class="stars">★★★★★</div><p>“Simple, traditional taste. The kind of sweet shop you keep coming back to.”</p><small>— Kanpur family</small></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="visit">
+      <div class="container visit-grid">
+        <div class="visit-card reveal">
+          <div class="eyebrow">Come say hello</div>
+          <h2>Find us in Kanpur.</h2>
+          <p>Drop in for a hot samosa, take home a mithai box, or call ahead for your order.</p>
+          <ul class="contact-list">
+            <li><span>📍</span><div><b>Shop Address</b><span> Tisti <br>Kanpur Dehat, Uttar Pradesh</span></div></li>
+            <li><span>🕐</span><div><b>Opening Hours</b><span>Daily • 8:00 AM – 10:00 PM</span></div></li>
+            <li><span>☎</span><div><b>Call / WhatsApp</b><span>+91 6388746495</span></div></li>
+          </ul>
+          <div class="actions">
+            <a class="btn btn-primary" href="tel:+916388746495>Call Now</a>
+            <a class="btn" style="background:white;border:1px solid var(--line);color:var(--wine)" href="https://wa.me/916388746495" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+        </div>
+        <a class="map reveal" href="https://maps.app.goo.gl/CL4hKyzMXBvShQVq6" target="_blank" rel="noopener" aria-label="Open Kanpur in Google Maps">
+          <div class="map-pin"><strong>📍 Sachin Nitin Sweet</strong><small>Kanpur, Uttar Pradesh</small></div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="logo" href="#home">
+            <div class="logo-mark">SN</div>
+            <div class="logo-text"><strong>Sachin Nitin Sweet</strong><span>Kanpur • Since 1998</span></div>
+          </a>
+          <p>Traditional mithai, hot snacks and a whole lot of happiness — proudly serving Kanpur.</p>
+        </div>
+        <div class="footer-links">
+          <div><h4>EXPLORE</h4><a href="#menu">Mithai</a><a href="#snacks">Snacks</a><a href="#story">Our Story</a></div>
+          <div><h4>VISIT</h4><a href="#visit">Location</a><a href="tel:+916388746495">Call Us</a><a href="https://wa.me/916388746495">WhatsApp</a></div>
+        </div>
+      </div>
+      <div class="copyright"><span>© 2026 Sachin Nitin Sweet. All rights reserved.</span><span>Made with ♥ in Kanpur</span></div>
+    </div>
+  </footer>
+
+  <a class="floating-order" href="https://wa.me/916388746495?text=Hi%20Sachin%20Nitin%20Sweet%2C%20I%20want%20to%20place%20an%20order." target="_blank" rel="noopener">💬 Order on WhatsApp</a>
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // Header glass effect
+    const header = document.getElementById("header");
+    const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 20);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    // Mobile menu
+    const menuBtn = document.getElementById("menuBtn");
+    const nav = document.querySelector("nav");
+    menuBtn.addEventListener("click", () => {
+      const open = nav.style.display === "flex";
+      nav.style.cssText = open ? "" : "display:flex;position:absolute;top:68px;left:14px;right:14px;background:#fffdf8;color:#211719;padding:18px;border-radius:18px;box-shadow:0 18px 40px rgba(0,0,0,.12);flex-direction:column;gap:14px;";
+    });
+    nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => nav.style.cssText = ""));
+
+    // Product filtering
+    const filters = document.querySelectorAll(".filter");
+    const products = document.querySelectorAll(".product");
+    filters.forEach(filter => {
+      filter.addEventListener("click", () => {
+        filters.forEach(f => f.classList.remove("active"));
+        filter.classList.add("active");
+        const value = filter.dataset.filter;
+        products.forEach(product => {
+          product.style.display = value === "all" || product.dataset.category === value ? "" : "none";
+        });
+      });
+    });
+
+    // Simple order interaction
+    const toast = document.getElementById("toast");
+    let toastTimer;
+    document.querySelectorAll(".add").forEach(btn => {
+      btn.addEventListener("click", () => {
+        toast.textContent = `${btn.dataset.name} added to your order`;
+        toast.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+      });
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .08 });
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
